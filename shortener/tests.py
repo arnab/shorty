@@ -5,12 +5,15 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+from django.core.urlresolvers import reverse
+
 from django.test import TestCase
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class ShortenerViewsTest(TestCase):
+    def test_home_view_renders(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Can successfully get to the (main) entry-point view
         """
-        self.assertEqual(1 + 1, 2)
+        response = self.client.get(reverse('shortener:home'))
+        self.assertEqual(response.status_code, 200)
