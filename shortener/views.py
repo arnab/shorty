@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.views.decorators.http import require_POST
-from django.shortcuts import render
+from django.views.decorators.http import require_POST, require_safe
+from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 
 from shortener import forms
@@ -19,3 +19,8 @@ def create(request):
         return HttpResponseRedirect(reverse('shortener:home'))
     else:
         return render(request, 'shortener/home.html', {'form': form})
+
+@require_safe
+def show(request, short_code):
+    short_url = get_object_or_404(ShortURL, short_code=short_code)
+    return HttpResponseRedirect(short_url.url)
