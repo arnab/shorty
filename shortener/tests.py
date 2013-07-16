@@ -33,8 +33,3 @@ class ShortenerViewsTest(TestCase):
         response = self.client.post(reverse('shortener:create'), {'url': 'url-to-shorten'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Enter a valid URL")
-
-    def test_create_with_url_and_shortcode(self):
-        """
-        Should create short URL with given URL and code
-        """

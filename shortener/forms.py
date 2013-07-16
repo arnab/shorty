@@ -1,5 +1,6 @@
 from django import forms
 
+# TODO: Can we use a model form
 class CreateShortURLForm(forms.Form):
     url = forms.URLField(
         max_length=1000,
