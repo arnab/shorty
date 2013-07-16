@@ -39,8 +39,7 @@ class ShortURL(models.Model):
         group by hour
         """.format(self.id)
         cursor.execute(sql)
-        # return dictfetchall(cursor)
-        return cursor.fetchall()
+        return dictfetchall(cursor)
 
     def is_blacklisted_site(self):
         return any([
