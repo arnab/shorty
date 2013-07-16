@@ -13,6 +13,7 @@ def home(request):
 @require_POST
 def create(request):
     form = forms.CreateShortURLForm(request.POST)
+
     if form.is_valid():
         ShortURL.objects.create(**form.cleaned_data)
         return HttpResponseRedirect(reverse('shortener:home'))

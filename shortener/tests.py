@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 
 from django.test import TestCase
 
-
 class ShortenerViewsTest(TestCase):
     def test_home_view_renders(self):
         """
