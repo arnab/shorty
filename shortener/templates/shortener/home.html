@@ -1,7 +1,12 @@
+{% extends "shortener/base.html" %}
+{% load bootstrap_toolkit %}
+{% block content %}
+
 <form action='{% url 'shortener:home' %}'>
     {{ form.non_field_errors }}
 
-    {{ form.as_p }}
-    <input type="submit"/>
+    {{ form|as_bootstrap }}
+    <input type="submit" class="text btn btn-primary" value="Create">
 </form>
 
+{% endblock %}
