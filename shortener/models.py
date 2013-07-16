@@ -36,7 +36,7 @@ class ShortURL(models.Model):
         group by hour
         """.format(self.id)
         cursor.execute(sql)
-        return cursor.fetchall()
+        return dictfetchall(cursor)
 
 class Visit(models.Model):
     short_url = models.ForeignKey(ShortURL)
@@ -56,3 +56,11 @@ def choose_short_code():
     while ShortURL.objects.filter(short_code=code).exists():
         code = generate_short_code()
     return code
+
+def dictfetchall(cursor):
+    "Returns all rows from a cursor as a dict"
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
