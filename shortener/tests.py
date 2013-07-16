@@ -17,3 +17,24 @@ class ShortenerViewsTest(TestCase):
         """
         response = self.client.get(reverse('shortener:home'))
         self.assertEqual(response.status_code, 200)
+
+    def test_create_without_url(self):
+        """
+        Should reject attemps to submit with no URL
+        """
+        response = self.client.post(reverse('shortener:create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "URL is required")
+
+    def test_create_with_invalid_url(self):
+        """
+        Should reject attemps to submit with invalid URL
+        """
+        response = self.client.post(reverse('shortener:create'), {'url': 'url-to-shorten'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Enter a valid URL")
+
+    def test_create_with_url_and_shortcode(self):
+        """
+        Should create short URL with given URL and code
+        """
