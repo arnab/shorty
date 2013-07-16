@@ -1,9 +1,12 @@
 import uuid
+import re
 from django.db import models
 from django.db.models import Count
 from django.db import connection
 
 class ShortURL(models.Model):
+    SPAM_BLACKLIST = ['spammer.net']
+
     url = models.URLField(
         max_length=1000,
         verbose_name='URL to shorten',
@@ -36,7 +39,13 @@ class ShortURL(models.Model):
         group by hour
         """.format(self.id)
         cursor.execute(sql)
-        return dictfetchall(cursor)
+        # return dictfetchall(cursor)
+        return cursor.fetchall()
+
+    def is_blacklisted_site(self):
+        return any([
+            site in self.url for site in self.SPAM_BLACKLIST
+        ])
 
 class Visit(models.Model):
     short_url = models.ForeignKey(ShortURL)
