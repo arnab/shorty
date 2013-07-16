@@ -1,0 +1,2 @@
+psycopg2==2.5.1
+django-bootstrap-toolkit==2.15.0
