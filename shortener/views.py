@@ -1,4 +1,7 @@
 from django.shortcuts import render
 
+from shortener import forms
+
 def home(request):
-    return render(request, 'shortener/home.html')
+    form = forms.CreateShortURLForm()
+    return render(request, 'shortener/home.html', {'form': form})
