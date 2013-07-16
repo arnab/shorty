@@ -3,7 +3,6 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
-
 from shortener import forms
 from shortener.models import ShortURL
 

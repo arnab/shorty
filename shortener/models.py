@@ -1,7 +1,10 @@
 from django.db import models
 
 class ShortURL(models.Model):
-    url = models.CharField(max_length=1000)
+    url = models.URLField(
+        max_length=1000,
+        verbose_name='URL to shorten',
+    )
     short_code = models.CharField(
         max_length=30,
         unique=True,
