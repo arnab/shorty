@@ -22,6 +22,9 @@ class ShortURL(models.Model):
                 self.short_code = choose_short_code()
         super(ShortURL, self).save(*args, **kwargs)
 
+class Visit(models.Model):
+    visited_at = models.DateTimeField()
+
 def generate_short_code():
     return str(uuid.uuid1())[0:7]
 
