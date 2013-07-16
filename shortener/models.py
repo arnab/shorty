@@ -46,6 +46,8 @@ class ShortURL(models.Model):
         return any([
             site in self.url for site in self.SPAM_BLACKLIST
         ])
+    is_blacklisted_site.boolean = True
+    is_blacklisted_site.short_description = 'Blacklisted site?'
 
 class Visit(models.Model):
     short_url = models.ForeignKey(ShortURL)
